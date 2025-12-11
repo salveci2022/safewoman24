@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { Shield, Heart, Lock, ShieldHeart } from "lucide-react";
 import { SafeHavenLogo, SafeHavenLogoCompact } from "@/components/SafeHavenLogo";
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, isContactLogin = false }) {
   const [isLoading, setIsLoading] = useState(false);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [registerData, setRegisterData] = useState({
