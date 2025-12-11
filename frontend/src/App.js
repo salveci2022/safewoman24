@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import ContactDashboard from "./pages/ContactDashboard";
 import { Toaster } from "@/components/ui/sonner";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
