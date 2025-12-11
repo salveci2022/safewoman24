@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { axiosInstance } from "../App";
 import { toast } from "sonner";
 import { AlertCircle, Users, Settings, LogOut, UserPlus, Trash2, Mail, Phone, AlertTriangle } from "lucide-react";
+import { SafeHavenLogoCompact } from "@/components/SafeHavenLogo";
 import {
   Dialog,
   DialogContent,
