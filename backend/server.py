@@ -238,6 +238,11 @@ async def get_me(user_id: str = Depends(get_current_user)):
 
 @api_router.post("/contacts", response_model=TrustedContact)
 async def create_contact(contact: TrustedContactCreate, user_id: str = Depends(get_current_user)):
+    # Check if contact already exists
+    existing = await db.trusted_contacts.find_one({"email": contact.email, "user_id": user_id}, {"_id": 0})
+    if existing:
+        raise HTTPException(status_code=400, detail="Contato já cadastrado")
+    
     trusted_contact = TrustedContact(
         user_id=user_id,
         name=contact.name,
@@ -247,6 +252,7 @@ async def create_contact(contact: TrustedContactCreate, user_id: str = Depends(g
     
     contact_dict = trusted_contact.model_dump()
     contact_dict['created_at'] = contact_dict['created_at'].isoformat()
+    contact_dict['password'] = hash_password(contact.password)
     
     await db.trusted_contacts.insert_one(contact_dict)
     return trusted_contact
