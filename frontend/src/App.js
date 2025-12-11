@@ -69,16 +69,26 @@ function App() {
             path="/login"
             element={
               isAuthenticated ? (
-                <Navigate to="/dashboard" replace />
+                <Navigate to={userType === "contact" ? "/contact-dashboard" : "/dashboard"} replace />
               ) : (
                 <Login onLogin={handleLogin} />
               )
             }
           />
           <Route
+            path="/contact-login"
+            element={
+              isAuthenticated && userType === "contact" ? (
+                <Navigate to="/contact-dashboard" replace />
+              ) : (
+                <Login onLogin={handleLogin} isContactLogin={true} />
+              )
+            }
+          />
+          <Route
             path="/dashboard"
             element={
-              isAuthenticated ? (
+              isAuthenticated && userType === "user" ? (
                 <Dashboard onLogout={handleLogout} />
               ) : (
                 <Navigate to="/login" replace />
@@ -86,10 +96,20 @@ function App() {
             }
           />
           <Route
+            path="/contact-dashboard"
+            element={
+              isAuthenticated && userType === "contact" ? (
+                <ContactDashboard onLogout={handleLogout} />
+              ) : (
+                <Navigate to="/contact-login" replace />
+              )
+            }
+          />
+          <Route
             path="/"
             element={
               isAuthenticated ? (
-                <Navigate to="/dashboard" replace />
+                <Navigate to={userType === "contact" ? "/contact-dashboard" : "/dashboard"} replace />
               ) : (
                 <Navigate to="/login" replace />
               )
