@@ -148,12 +148,14 @@ export default function Dashboard({ onLogout }) {
       <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50" data-testid="dashboard-header">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <img 
-                src="/logo.png" 
-                alt="Prof-Safe 24" 
-                className="h-10 w-auto sm:h-12"
-              />
+            <div className="flex items-center gap-3">
+              <SafeHavenLogoCompact className="w-12 h-12" />
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  SafeHaven
+                </h1>
+                <p className="text-xs text-gray-500 hidden sm:block">Você está segura</p>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
