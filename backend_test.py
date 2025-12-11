@@ -79,7 +79,7 @@ class SafeHavenAPITester:
         """Test user registration"""
         timestamp = datetime.now().strftime('%H%M%S')
         user_data = {
-            "email": f"test_user_{timestamp}@safehaven.test",
+            "email": f"test_user_{timestamp}@example.com",
             "password": "TestPassword123!",
             "name": "Maria Test",
             "phone": "(11) 99999-9999"
