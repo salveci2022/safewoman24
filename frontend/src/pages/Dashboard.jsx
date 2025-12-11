@@ -74,8 +74,8 @@ export default function Dashboard({ onLogout }) {
     e.preventDefault();
     try {
       await axiosInstance.post("/contacts", newContact);
-      toast.success("Contato adicionado com sucesso!");
-      setNewContact({ name: "", email: "", phone: "" });
+      toast.success("Contato adicionado com sucesso! Ele poderá acessar o painel de alertas.");
+      setNewContact({ name: "", email: "", phone: "", password: "" });
       setIsDialogOpen(false);
       loadContacts();
     } catch (error) {
