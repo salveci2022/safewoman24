@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { axiosInstance } from "../App";
 import { toast } from "sonner";
-import { AlertCircle, Users, Settings, LogOut, UserPlus, Trash2, Mail, Phone, Shield, AlertTriangle } from "lucide-react";
+import { AlertCircle, Users, Settings, LogOut, UserPlus, Trash2, Mail, Phone, AlertTriangle } from "lucide-react";
 import {
   Dialog,
   DialogContent,
