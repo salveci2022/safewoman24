@@ -115,7 +115,7 @@ export default function Login({ onLogin, isContactLogin = false }) {
                 </CardTitle>
               </div>
               <CardDescription className="text-base">
-                Entre ou crie sua conta para começar
+                {isContactLogin ? "Entre como contato de confiança" : "Entre ou crie sua conta para começar"}
               </CardDescription>
             </CardHeader>
             <CardContent>
