@@ -6,7 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { axiosInstance } from "../App";
 import { toast } from "sonner";
-import { Shield, Heart, Lock } from "lucide-react";
+import { Shield, Heart, Lock, ShieldHeart } from "lucide-react";
+import { SafeHavenLogo, SafeHavenLogoCompact } from "@/components/SafeHavenLogo";
 
 export default function Login({ onLogin }) {
   const [isLoading, setIsLoading] = useState(false);
