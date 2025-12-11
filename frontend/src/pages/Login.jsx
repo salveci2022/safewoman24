@@ -24,11 +24,12 @@ export default function Login({ onLogin, isContactLogin = false }) {
     setIsLoading(true);
 
     try {
-      const response = await axiosInstance.post("/auth/login", loginData);
+      const endpoint = isContactLogin ? "/contacts/login" : "/auth/login";
+      const response = await axiosInstance.post(endpoint, loginData);
       localStorage.setItem("token", response.data.access_token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       toast.success("Login realizado com sucesso!");
-      onLogin();
+      onLogin(isContactLogin ? "contact" : "user");
     } catch (error) {
       toast.error(error.response?.data?.detail || "Erro ao fazer login");
     } finally {
