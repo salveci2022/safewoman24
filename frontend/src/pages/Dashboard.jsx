@@ -35,7 +35,7 @@ export default function Dashboard({ onLogout }) {
   const [alerts, setAlerts] = useState([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSendingAlert, setIsSendingAlert] = useState(false);
-  const [newContact, setNewContact] = useState({ name: "", email: "", phone: "" });
+  const [newContact, setNewContact] = useState({ name: "", email: "", phone: "", password: "" });
 
   useEffect(() => {
     loadUser();
