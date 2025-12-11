@@ -1,0 +1,16 @@
+{
+  "summary": {
+    "total_tests": 1,
+    "passed_tests": 0,
+    "success_rate": "0.0%",
+    "timestamp": "2025-12-11T16:46:49.962158"
+  },
+  "detailed_results": [
+    {
+      "test": "User Registration",
+      "success": false,
+      "details": "Status: 422 (expected 200), Error: [{'type': 'value_error', 'loc': ['body', 'email'], 'msg': 'value is not a valid email address: The part after the @-sign is a special-use or reserved name that cannot be used with email.', 'input': 'test_user_164649@safehaven.test', 'ctx': {'reason': 'The part after the @-sign is a special-use or reserved name that cannot be used with email.'}}]",
+      "timestamp": "2025-12-11T16:46:49.961292"
+    }
+  ]
+}
