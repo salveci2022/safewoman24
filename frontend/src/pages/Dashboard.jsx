@@ -281,6 +281,19 @@ export default function Dashboard({ onLogout }) {
                         onChange={(e) => setNewContact({ ...newContact, phone: e.target.value })}
                       />
                     </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="contact-password">Senha de Acesso ao Painel</Label>
+                      <Input
+                        id="contact-password"
+                        type="password"
+                        placeholder="Senha para acessar alertas"
+                        data-testid="contact-password-input"
+                        value={newContact.password}
+                        onChange={(e) => setNewContact({ ...newContact, password: e.target.value })}
+                        required
+                      />
+                      <p className="text-xs text-gray-500">Esta senha será usada pelo contato para acessar o painel de alertas</p>
+                    </div>
                     <DialogFooter>
                       <Button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-xl" data-testid="submit-contact-button">
                         Adicionar
