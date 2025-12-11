@@ -58,16 +58,15 @@ export default function Login({ onLogin }) {
         {/* Left Side - Branding */}
         <div className="hidden lg:flex flex-1 flex-col justify-center space-y-8">
           <div className="space-y-4 animate-fade-in">
-            <div className="flex items-center gap-3">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center logo-pulse">
-                <Shield className="w-9 h-9 text-white" />
-              </div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent">
-                SafeHaven
-              </h1>
+            <div className="flex items-center justify-center">
+              <img 
+                src="/logo.png" 
+                alt="Prof-Safe 24" 
+                className="w-80 h-auto logo-pulse"
+              />
             </div>
             <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-              Um lugar seguro para você. Alerte pessoas de confiança de forma rápida, discreta e silenciosa.
+              Proteção profissional 24 horas. Alerte pessoas de confiança de forma rápida, discreta e silenciosa.
             </p>
           </div>
 
