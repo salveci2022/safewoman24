@@ -376,9 +376,12 @@ async def get_contact_alerts(user_id: str = Depends(get_current_user)):
     if not contact:
         raise HTTPException(status_code=404, detail="Contato não encontrado")
     
-    # Find all alerts sent to this contact's email
+    # Get the user_id who added this contact
+    main_user_id = contact.get('user_id')
+    
+    # Find all alerts from that user
     alerts = await db.alerts.find(
-        {"sent_to": contact['email']},
+        {"user_id": main_user_id},
         {"_id": 0}
     ).sort("timestamp", -1).to_list(100)
     
