@@ -329,6 +329,84 @@ async def clear_user_data(user_id: str = Depends(get_current_user)):
     await db.users.delete_one({"id": user_id})
     return {"message": "Todos os dados foram removidos com sucesso"}
 
+# Contact endpoints
+@api_router.post("/contacts/login", response_model=TokenResponse)
+async def contact_login(credentials: ContactLogin):
+    # Find contact
+    contact_doc = await db.trusted_contacts.find_one({"email": credentials.email}, {"_id": 0})
+    if not contact_doc:
+        raise HTTPException(status_code=401, detail="Email ou senha incorretos")
+    
+    # Verify password
+    if not verify_password(credentials.password, contact_doc['password']):
+        raise HTTPException(status_code=401, detail="Email ou senha incorretos")
+    
+    # Convert datetime
+    if isinstance(contact_doc['created_at'], str):
+        contact_doc['created_at'] = datetime.fromisoformat(contact_doc['created_at'])
+    
+    # Create user object from contact
+    user = User(
+        id=contact_doc['id'],
+        email=contact_doc['email'],
+        name=contact_doc['name'],
+        phone=contact_doc.get('phone'),
+        created_at=contact_doc['created_at']
+    )
+    
+    # Generate token with contact flag
+    token = create_access_token({"sub": contact_doc['id'], "type": "contact"})
+    
+    return TokenResponse(
+        access_token=token,
+        token_type="bearer",
+        user=user
+    )
+
+@api_router.get("/contacts/alerts")
+async def get_contact_alerts(user_id: str = Depends(get_current_user)):
+    # Find contact
+    contact = await db.trusted_contacts.find_one({"id": user_id}, {"_id": 0})
+    if not contact:
+        raise HTTPException(status_code=404, detail="Contato não encontrado")
+    
+    # Find all alerts sent to this contact's email
+    alerts = await db.alerts.find(
+        {"sent_to": contact['email']},
+        {"_id": 0}
+    ).sort("timestamp", -1).to_list(100)
+    
+    # Get user info for each alert
+    for alert in alerts:
+        if isinstance(alert['timestamp'], str):
+            alert['timestamp'] = datetime.fromisoformat(alert['timestamp'])
+        
+        user_doc = await db.users.find_one({"id": alert['user_id']}, {"_id": 0, "password": 0})
+        if user_doc:
+            alert['user_name'] = user_doc['name']
+            alert['user_phone'] = user_doc.get('phone')
+    
+    return alerts
+
+@api_router.post("/contacts/alerts/{alert_id}/acknowledge")
+async def acknowledge_alert(alert_id: str, user_id: str = Depends(get_current_user)):
+    # Mark alert as acknowledged
+    result = await db.alerts.update_one(
+        {"id": alert_id},
+        {"$set": {"acknowledged": True, "acknowledged_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Alerta não encontrado")
+    
+    return {"message": "Alerta confirmado"}
+
+@api_router.delete("/contacts/clear")
+async def clear_contact_data(user_id: str = Depends(get_current_user)):
+    # Only clear the contact's own data
+    await db.trusted_contacts.delete_one({"id": user_id})
+    return {"message": "Dados removidos com sucesso"}
+
 app.include_router(api_router)
 
 app.add_middleware(
