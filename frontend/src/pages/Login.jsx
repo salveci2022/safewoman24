@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { axiosInstance } from "../App";
 import { toast } from "sonner";
-import { Heart, Lock } from "lucide-react";
+import { Shield, Heart, Lock } from "lucide-react";
 
 export default function Login({ onLogin }) {
   const [isLoading, setIsLoading] = useState(false);
