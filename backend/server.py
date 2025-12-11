@@ -44,6 +44,10 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
+class ContactLogin(BaseModel):
+    email: EmailStr
+    password: str
+
 class User(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
