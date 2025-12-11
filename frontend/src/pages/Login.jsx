@@ -119,11 +119,27 @@ export default function Login({ onLogin, isContactLogin = false }) {
               </CardDescription>
             </CardHeader>
             <CardContent>
+              {!isContactLogin && (
+                <div className="mb-4 text-center">
+                  <a href="/contact-login" className="text-sm text-purple-600 hover:underline">
+                    Sou um contato de confiança →
+                  </a>
+                </div>
+              )}
+              {isContactLogin && (
+                <div className="mb-4 text-center">
+                  <a href="/login" className="text-sm text-purple-600 hover:underline">
+                    ← Voltar ao login principal
+                  </a>
+                </div>
+              )}
               <Tabs defaultValue="login" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6">
-                  <TabsTrigger value="login" data-testid="login-tab">Entrar</TabsTrigger>
-                  <TabsTrigger value="register" data-testid="register-tab">Criar Conta</TabsTrigger>
-                </TabsList>
+                {!isContactLogin && (
+                  <TabsList className="grid w-full grid-cols-2 mb-6">
+                    <TabsTrigger value="login" data-testid="login-tab">Entrar</TabsTrigger>
+                    <TabsTrigger value="register" data-testid="register-tab">Criar Conta</TabsTrigger>
+                  </TabsList>
+                )}
 
                 <TabsContent value="login">
                   <form onSubmit={handleLogin} className="space-y-4" data-testid="login-form">
