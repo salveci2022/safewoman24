@@ -1,0 +1,76 @@
+{
+  "summary": {
+    "total_tests": 11,
+    "passed_tests": 10,
+    "success_rate": "90.9%",
+    "timestamp": "2025-12-11T16:47:01.017383"
+  },
+  "detailed_results": [
+    {
+      "test": "User Registration",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-12-11T16:46:59.141445"
+    },
+    {
+      "test": "User Login",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-12-11T16:46:59.448488"
+    },
+    {
+      "test": "Get User Profile",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-12-11T16:46:59.532490"
+    },
+    {
+      "test": "Add Trusted Contact",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-12-11T16:46:59.600101"
+    },
+    {
+      "test": "List Trusted Contacts",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-12-11T16:46:59.644425"
+    },
+    {
+      "test": "Send Emergency Alert",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-12-11T16:46:59.755282"
+    },
+    {
+      "test": "Get Alerts History",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-12-11T16:46:59.795315"
+    },
+    {
+      "test": "Delete Trusted Contact",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-12-11T16:47:00.884225"
+    },
+    {
+      "test": "Invalid Login (Should Fail)",
+      "success": true,
+      "details": "Status: 401",
+      "timestamp": "2025-12-11T16:47:00.921269"
+    },
+    {
+      "test": "Unauthorized Access (Should Fail)",
+      "success": false,
+      "details": "Status: 403 (expected 401), Error: Not authenticated",
+      "timestamp": "2025-12-11T16:47:00.969635"
+    },
+    {
+      "test": "Clear User Data",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-12-11T16:47:01.016378"
+    }
+  ]
+}

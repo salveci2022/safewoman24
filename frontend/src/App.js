@@ -1,0 +1,124 @@
+import { useState, useEffect } from "react";
+import "@/App.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import axios from "axios";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import ContactDashboard from "./pages/ContactDashboard";
+import { Toaster } from "@/components/ui/sonner";
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+export const API = `${BACKEND_URL}/api`;
+
+export const axiosInstance = axios.create({
+  baseURL: API,
+});
+
+// Add token to requests
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userType, setUserType] = useState(null); // 'user' or 'contact'
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const type = localStorage.getItem("userType");
+    if (token) {
+      setIsAuthenticated(true);
+      setUserType(type || "user");
+    }
+    setLoading(false);
+  }, []);
+
+  const handleLogin = (type = "user") => {
+    setIsAuthenticated(true);
+    setUserType(type);
+    localStorage.setItem("userType", type);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userType");
+    setIsAuthenticated(false);
+    setUserType(null);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="App">
+      <Toaster position="top-center" richColors />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              isAuthenticated ? (
+                <Navigate to={userType === "contact" ? "/contact-dashboard" : "/dashboard"} replace />
+              ) : (
+                <Login onLogin={handleLogin} />
+              )
+            }
+          />
+          <Route
+            path="/contact-login"
+            element={
+              isAuthenticated && userType === "contact" ? (
+                <Navigate to="/contact-dashboard" replace />
+              ) : (
+                <Login onLogin={handleLogin} isContactLogin={true} />
+              )
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated && userType === "user" ? (
+                <Dashboard onLogout={handleLogout} />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          <Route
+            path="/contact-dashboard"
+            element={
+              isAuthenticated && userType === "contact" ? (
+                <ContactDashboard onLogout={handleLogout} />
+              ) : (
+                <Navigate to="/contact-login" replace />
+              )
+            }
+          />
+          <Route
+            path="/"
+            element={
+              isAuthenticated ? (
+                <Navigate to={userType === "contact" ? "/contact-dashboard" : "/dashboard"} replace />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
