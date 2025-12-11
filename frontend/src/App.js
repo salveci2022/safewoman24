@@ -25,24 +25,31 @@ axiosInstance.interceptors.request.use((config) => {
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userType, setUserType] = useState(null); // 'user' or 'contact'
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const type = localStorage.getItem("userType");
     if (token) {
       setIsAuthenticated(true);
+      setUserType(type || "user");
     }
     setLoading(false);
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = (type = "user") => {
     setIsAuthenticated(true);
+    setUserType(type);
+    localStorage.setItem("userType", type);
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("userType");
     setIsAuthenticated(false);
+    setUserType(null);
   };
 
   if (loading) {
