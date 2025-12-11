@@ -69,6 +69,7 @@ class TrustedContactCreate(BaseModel):
     name: str
     email: EmailStr
     phone: Optional[str] = None
+    password: str
 
 class Alert(BaseModel):
     model_config = ConfigDict(extra="ignore")
