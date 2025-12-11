@@ -107,13 +107,12 @@ export default function Login({ onLogin }) {
         <div className="flex-1 max-w-md w-full">
           <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm" data-testid="auth-card">
             <CardHeader className="space-y-1">
-              <div className="flex items-center gap-2 lg:hidden mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-white" />
-                </div>
-                <CardTitle className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  SafeHaven
-                </CardTitle>
+              <div className="flex items-center justify-center lg:hidden mb-4">
+                <img 
+                  src="/logo.png" 
+                  alt="Prof-Safe 24" 
+                  className="w-48 h-auto"
+                />
               </div>
               <CardDescription className="text-base">
                 Entre ou crie sua conta para começar
